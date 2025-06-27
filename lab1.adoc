@@ -46,6 +46,7 @@ include::titul.adoc[]
 
 
 == Почему результат выражения равен 12
+[source,cpp]
 ----
 #include <iostream>
 
