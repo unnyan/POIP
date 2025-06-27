@@ -1,0 +1,21 @@
+@startuml StrategyPattern
+
+class Context
+
+class IStrategy {
+    +void Execute()
+}
+
+class ConcreteStrategyA {
+    +void Execute()
+}
+
+class ConcreteStrategyB {
+    +void Execute()
+}
+
+Context --> IStrategy
+IStrategy <|-- ConcreteStrategyA
+IStrategy <|-- ConcreteStrategyB
+
+@enduml

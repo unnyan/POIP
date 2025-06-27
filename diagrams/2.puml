@@ -1,0 +1,21 @@
+@startuml StatePattern
+
+class IState {
+    +void Execute()
+}
+
+class ConcreteStateA {
+    +void Execute()
+}
+
+class ConcreteStateB {
+    +void Execute()
+}
+
+class Context
+
+Context --> IState
+IState <|-- ConcreteStateA
+IState <|-- ConcreteStateB
+
+@enduml
