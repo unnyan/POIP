@@ -1,0 +1,91 @@
+@startuml ModeArchitecture
+top to bottom direction
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+
+' ===== Классы и интерфейсы =====
+class Led {
+    Led(address: int, pinNumber: int)
+    void TurnOn()
+    void TurnOff()
+    void Toggle()
+}
+
+interface IToggable {
+    void Toggle()
+}
+
+interface ISwitcher {
+    void TurnOn()
+    void TurnOff()
+}
+
+class TreeMode {
+    Mode(leds[]: ILed)
+    void Execute()
+}
+
+class ChessMode {
+    int mActiveLEDid
+    Mode(leds[]: ILed)
+    void Execute()
+}
+
+class AllMode {
+    Mode(leds[]: ILed)
+    void Execute()
+}
+
+interface IMode {
+    void Execute()
+}
+
+class ModeManager {
+    Modes(modes[]: IMode)
+    void SetNextMode()
+    void Update()
+}
+
+interface IModeManager {
+    void SetNextMode()
+    void Update()
+}
+
+class Button {
+    void IsPressed()
+}
+
+interface IButton {
+    void IsPressed()
+}
+
+' ===== Структура связей =====
+Led --> IToggable
+Led --> ISwitcher
+Led --> TreeMode
+Led --> ChessMode
+Led --> AllMode
+
+TreeMode --> IMode
+ChessMode --> IMode
+AllMode --> IMode
+
+IMode --> ModeManager
+
+ModeManager --> IModeManager
+
+Button --> IButton
+
+' ===== Расположение =====
+Led -[hidden]-> IToggable
+IToggable -[hidden]-> ISwitcher
+ISwitcher -[hidden]-> TreeMode
+TreeMode -[hidden]-> ChessMode
+ChessMode -[hidden]-> AllMode
+AllMode -[hidden]-> IMode
+IMode -[hidden]-> ModeManager
+ModeManager -[hidden]-> IModeManager
+ModeManager -[hidden]-> Button
+Button -[hidden]-> IButton
+
+@enduml
